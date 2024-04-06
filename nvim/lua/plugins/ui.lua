@@ -122,6 +122,18 @@ return {
 	},
 
 	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = function(_, opts)
+			if true == true then
+				opts.options = {
+					theme = "iceberg_dark",
+				}
+			end
+		end,
+	},
+
+	{
 		"folke/zen-mode.nvim",
 		cmd = "ZenMode",
 		opts = {
