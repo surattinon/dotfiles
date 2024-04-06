@@ -26,7 +26,7 @@ function M.cowboy()
 				end
 			else
 				count = count + 1
-				timer:start(0, 0, function()
+				timer:start(100, 0, function()
 					count = 0
 				end)
 				return map
