@@ -81,6 +81,12 @@ export TERM="xterm-256color"
 # set  default path for npm-global
 export PATH=~/.npm-global/bin:$PATH
 
+# set default editor
+export EDITOR="nvim"
+
+# set default sudo editor
+export SUDO_EDITOR="nvim"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
