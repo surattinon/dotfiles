@@ -3,9 +3,9 @@ return {
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		opts = {
-			direction = "horizontal",
+			direction = "float",
 			open_mapping = [[<c-\>]],
-			close_in_exit = "flase",
+			shell = "/bin/zsh",
 		},
 		config = true,
 	},

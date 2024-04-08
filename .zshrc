@@ -87,6 +87,9 @@ export EDITOR="nvim"
 # set default sudo editor
 export SUDO_EDITOR="nvim"
 
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -116,3 +119,6 @@ alias vi="nvim"
 
 alias nf="clear && neofetch"
 nf
+
+alias lls="eza --icons"
+alias ll="eza -l -g --icons"
