@@ -7,10 +7,36 @@ return {
 	-- 		vim.cmd([[ colorscheme NeoSolarized ]])
 	-- 	end,
 	-- },
+	-- {
+	-- 	"folke/tokyonight.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = {
+	-- 		transparent = false,
+	-- 	},
+	-- },
+	-- {
+	-- 	"bluz71/vim-moonfly-colors",
+	-- 	name = "moonfly",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	config = function()
+	-- 		vim.g.moonflyTransparent = true
+	-- 		vim.g.moonflyVirtualTextColor = true
+	-- 	end,
+	-- },
+	-- {
+	-- 	"bluz71/vim-nightfly-colors",
+	-- 	name = "nightfly",
+	-- 	lazy = true,
+	-- 	priority = 1000,
+	-- },
 	{
-		"folke/tokyonight.nvim",
-		lazy = false,
+		"catppuccin/nvim",
+		name = "catppuccin",
 		priority = 1000,
-		opts = {},
+		opts = {
+			-- transparent_background = true,
+		},
 	},
 }

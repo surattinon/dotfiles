@@ -3,8 +3,8 @@ return {
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		opts = {
-			direction = "float",
-			open_mapping = [[<c-\>]],
+			direction = "horizontal",
+			open_mapping = [[<c-t>]],
 			shell = "/bin/zsh",
 		},
 		config = true,

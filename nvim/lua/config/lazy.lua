@@ -18,7 +18,19 @@ require("lazy").setup({
 			"LazyVim/LazyVim",
 			import = "lazyvim.plugins",
 			opts = {
-				colorscheme = "tokyonight-night",
+				-- colorscheme = "tokyonight-night",
+				-- colorscheme = "moonfly",
+				colorscheme = "catppuccin-mocha",
+				-- colorscheme = "nightfly",
+				fillchars = {
+					horiz = "━",
+					horizup = "┻",
+					horizdown = "┳",
+					vert = "┃",
+					vertleft = "┫",
+					vertright = "┣",
+					verthoriz = "╋",
+				},
 				news = {
 					lazyvim = true,
 					neovim = true,
