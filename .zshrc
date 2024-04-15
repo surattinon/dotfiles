@@ -120,7 +120,7 @@ alias vi="nvim"
 alias nf="clear && neofetch"
 nf
 
-alias lls="eza --icons"
-alias ll="eza -la -g --icons"
+alias ll="eza -1 --icons"
+alias lla="eza -la -g --icons"
 
 alias lzg="lazygit"
