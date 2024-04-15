@@ -121,4 +121,6 @@ alias nf="clear && neofetch"
 nf
 
 alias lls="eza --icons"
-alias ll="eza -l -g --icons"
+alias ll="eza -la -g --icons"
+
+alias lzg="lazygit"
