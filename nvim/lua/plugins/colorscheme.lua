@@ -1,4 +1,14 @@
 return {
+  {
+		"craftzdog/solarized-osaka.nvim",
+		lazy = true,
+		priority = 1000,
+		opts = function()
+			return {
+				transparent = false,
+			}
+		end,
+	},
 	-- {
 	-- 	"Tsuzat/NeoSolarized.nvim",
 	-- 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -9,11 +19,15 @@ return {
 	-- },
 	-- {
 	-- 	"folke/tokyonight.nvim",
-	-- 	lazy = false,
+	-- 	lazy = true,
 	-- 	priority = 1000,
-	-- 	opts = {
-	-- 		transparent = false,
-	-- 	},
+	--    opts = function()
+	--        return {
+	--          style = "night",
+	--          transparent = true,
+	--          tokyonighy_dark_float = false,
+	--        }
+	--    end,
 	-- },
 	-- {
 	-- 	"bluz71/vim-moonfly-colors",
@@ -36,7 +50,7 @@ return {
 		name = "catppuccin",
 		priority = 1000,
 		opts = {
-			-- transparent_background = true,
+			transparent_background = true,
 		},
 	},
 }
