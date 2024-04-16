@@ -129,7 +129,7 @@ return {
     },
     opts = {
       options = {
-        theme = "horizon",
+        theme = "iceburg-dark",
         component_separators = { left = "", right = "" },
         section_separators = { left = "", right = "" },
         globalstatus = true,
