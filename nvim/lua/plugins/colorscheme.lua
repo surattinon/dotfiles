@@ -1,14 +1,14 @@
 return {
-  {
-		"craftzdog/solarized-osaka.nvim",
-		lazy = true,
-		priority = 1000,
-		opts = function()
-			return {
-				transparent = false,
-			}
-		end,
-	},
+	--  {
+	-- 	"craftzdog/solarized-osaka.nvim",
+	-- 	lazy = true,
+	-- 	priority = 1000,
+	-- 	opts = function()
+	-- 		return {
+	-- 			transparent = false,
+	-- 		}
+	-- 	end,
+	-- },
 	-- {
 	-- 	"Tsuzat/NeoSolarized.nvim",
 	-- 	lazy = false, -- make sure we load this during startup if it is your main colorscheme
@@ -45,12 +45,22 @@ return {
 	-- 	lazy = true,
 	-- 	priority = 1000,
 	-- },
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		opts = {
-			transparent_background = true,
-		},
-	},
+	-- {
+	-- 	"catppuccin/nvim",
+	-- 	name = "catppuccin",
+	-- 	priority = 1000,
+	-- 	opts = {
+	-- 		transparent_background = true,
+	-- 	},
+	-- },
+  {
+    "sainnhe/sonokai",
+    priority = 1000,
+    config = function()
+      vim.g.sonokai_transparent_background = "1"
+      vim.g.sonokai_enable_italic = "1"
+      vim.g.sonokai_style = "andromeda"
+      vim.cmd("colorscheme sonokai")
+    end,
+  }
 }

@@ -21,8 +21,9 @@ require("lazy").setup({
 				-- colorscheme = "solarized-osaka",
 				-- colorscheme = "tokyonight",
 				-- colorscheme = "moonfly",
-				colorscheme = "catppuccin-mocha",
+				-- colorscheme = "catppuccin-mocha",
 				-- colorscheme = "nightfly",
+				-- colorscheme = "NeoSolarized",
 				news = {
 					lazyvim = true,
 					neovim = true,

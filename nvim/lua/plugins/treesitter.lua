@@ -4,6 +4,9 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		opts = {
+      dependencies = {
+        "windwp/nvim-ts-autotag",
+      },
 			ensure_installed = {
 				"astro",
 				"cmake",
@@ -20,7 +23,13 @@ return {
 				"scss",
 				"sql",
 				"svelte",
+        "typescript",
+        "javascript",
+        "tsx",
 			},
+      highlight = {
+        enable = true,
+      },
 
 			-- matchup = {
 			-- 	enable = true,

@@ -32,7 +32,7 @@ return {
 			}
 		end,
 		opts = {
-			inlay_hints = { enabled = false },
+			inlay_hints = { enabled = true },
 			---@type lspconfig.options
 			servers = {
 				cssls = {},
@@ -146,19 +146,6 @@ return {
 				},
 			},
 			setup = {},
-		},
-	},
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		build = ":Copilot auth",
-		opts = {
-			suggestion = { enabled = false },
-			panel = { enabled = false },
-			filetypes = {
-				markdown = true,
-				help = true,
-			},
 		},
 	},
 }
