@@ -5,8 +5,7 @@ return {
 		opts = {
 			direction = "horizontal",
 			open_mapping = [[<c-t>]],
-			shell = "/bin/zsh",
-      size = 18,
+			size = 18,
 		},
 		config = true,
 	},

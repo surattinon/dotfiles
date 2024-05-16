@@ -21,7 +21,7 @@ require("lazy").setup({
 				-- colorscheme = "solarized-osaka",
 				-- colorscheme = "tokyonight",
 				-- colorscheme = "moonfly",
-				-- colorscheme = "catppuccin-mocha",
+				-- colorscheme = "catppuccin-latte",
 				-- colorscheme = "nightfly",
 				-- colorscheme = "NeoSolarized",
 				news = {

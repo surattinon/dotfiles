@@ -14,84 +14,190 @@ return {
 		opts = { snippet_engine = "luasnip" },
 	},
 
-	-- Incremental rename
 	{
-		"smjonas/inc-rename.nvim",
-		cmd = "IncRename",
-		config = true,
-	},
-
-	-- Refactoring tool
-	{
-		"ThePrimeagen/refactoring.nvim",
-		keys = {
+		"L3MON4D3/LuaSnip",
+		build = (not LazyVim.is_win())
+				and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build'; make install_jsregexp"
+			or nil,
+		dependencies = {
 			{
-				"<leader>r",
-				function()
-					require("refactoring").select_refactor()
+				"rafamadriz/friendly-snippets",
+				config = function()
+					require("luasnip.loaders.from_vscode").lazy_load()
 				end,
-				mode = "v",
-				noremap = true,
-				silent = true,
-				expr = false,
+			},
+			{
+				"nvim-cmp",
+				dependencies = {
+					"saadparwaiz1/cmp_luasnip",
+				},
+				opts = function(_, opts)
+					opts.snippet = {
+						expand = function(args)
+							require("luasnip").lsp_expand(args.body)
+						end,
+					}
+					table.insert(opts.sources, { name = "luasnip" })
+				end,
 			},
 		},
-		opts = {},
-	},
+		opts = {
+			history = true,
+			delete_check_events = "TextChanged",
+		},
+  -- stylua: ignore
+  keys = {
+    {
+      "<tab>",
+      function()
+        return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+      end,
+      expr = true, silent = true, mode = "i",
+    },
+    { "<tab>", function() require("luasnip").jump(1) end, mode = "s" },
+    { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+  },
 
-	-- Go forward/backward with square brackets
-	{
-		"echasnovski/mini.bracketed",
-		event = "BufReadPost",
-		config = function()
-			local bracketed = require("mini.bracketed")
-			bracketed.setup({
-				file = { suffix = "" },
-				window = { suffix = "" },
-				quickfix = { suffix = "" },
-				yank = { suffix = "" },
-				treesitter = { suffix = "n" },
-			})
-		end,
-	},
+		-- Incremental rename
+		{
+			"smjonas/inc-rename.nvim",
+			cmd = "IncRename",
+			config = true,
+		},
 
-	-- Better increase/descrease
-	{
-		"monaqa/dial.nvim",
+		-- Refactoring tool
+		{
+			"ThePrimeagen/refactoring.nvim",
+			keys = {
+				{
+					"<leader>r",
+					function()
+						require("refactoring").select_refactor()
+					end,
+					mode = "v",
+					noremap = true,
+					silent = true,
+					expr = false,
+				},
+			},
+			opts = {},
+		},
+
+		-- Go forward/backward with square brackets
+		{
+			"echasnovski/mini.bracketed",
+			event = "BufReadPost",
+			config = function()
+				local bracketed = require("mini.bracketed")
+				bracketed.setup({
+					file = { suffix = "" },
+					window = { suffix = "" },
+					quickfix = { suffix = "" },
+					yank = { suffix = "" },
+					treesitter = { suffix = "n" },
+				})
+			end,
+		},
+
+		-- Better increase/descrease
+		{
+			"monaqa/dial.nvim",
     -- stylua: ignore
     keys = {
       { "<C-a>", function() return require("dial.map").inc_normal() end, expr = true, desc = "Increment" },
       { "<C-x>", function() return require("dial.map").dec_normal() end, expr = true, desc = "Decrement" },
     },
-		config = function()
-			local augend = require("dial.augend")
-			require("dial.config").augends:register_group({
-				default = {
-					augend.integer.alias.decimal,
-					augend.integer.alias.hex,
-					augend.date.alias["%Y/%m/%d"],
-					augend.constant.alias.bool,
-					augend.semver.alias.semver,
-					augend.constant.new({ elements = { "let", "const" } }),
-				},
+			config = function()
+				local augend = require("dial.augend")
+				require("dial.config").augends:register_group({
+					default = {
+						augend.integer.alias.decimal,
+						augend.integer.alias.hex,
+						augend.date.alias["%Y/%m/%d"],
+						augend.constant.alias.bool,
+						augend.semver.alias.semver,
+						augend.constant.new({ elements = { "let", "const" } }),
+					},
+				})
+			end,
+		},
+
+		{
+			"simrat39/symbols-outline.nvim",
+			keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+			cmd = "SymbolsOutline",
+			opts = {
+				position = "right",
+			},
+		},
+
+		{
+			"nvim-cmp",
+			dependencies = { "hrsh7th/cmp-emoji" },
+			opts = function(_, opts)
+				table.insert(opts.sources, { name = "emoji" })
+			end,
+		},
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		---@param opts cmp.ConfigSchema
+		opts = function(_, opts)
+			local has_words_before = function()
+				unpack = unpack or table.unpack
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0
+					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			end
+
+			local luasnip = require("luasnip")
+			local cmp = require("cmp")
+
+			-- opts.completion = { completeopt = "menu,menuone,noinsert,noselect" }
+			-- opts.preselect = cmp.PreselectMode.None
+			opts.experimental = {
+				ghost_text = false,
+			}
+			opts.mapping = vim.tbl_extend("force", opts.mapping, {
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						-- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
+						cmp.select_next_item()
+						-- cmp.confirm({ select = true })
+						-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+						-- this way you will only jump inside the snippet region
+					elseif luasnip.expand_or_jumpable() then
+						luasnip.expand_or_jump()
+					elseif has_words_before() then
+						cmp.complete()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					elseif luasnip.jumpable(-1) then
+						luasnip.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
 			})
 		end,
 	},
-
 	{
-		"simrat39/symbols-outline.nvim",
-		keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
-		cmd = "SymbolsOutline",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		build = ":Copilot auth",
 		opts = {
-			position = "right",
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+			enable = false,
+			filetypes = {
+				markdown = true,
+				help = true,
+			},
 		},
-	},
-
-	{
-		"nvim-cmp",
-		dependencies = { "hrsh7th/cmp-emoji" },
-		opts = function(_, opts)
-			table.insert(opts.sources, { name = "emoji" })
-		end,
 	},
 }

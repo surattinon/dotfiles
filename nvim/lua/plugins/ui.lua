@@ -121,49 +121,49 @@ return {
 		end,
 	},
 
-{
-    "nvim-lualine/lualine.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "meuter/lualine-so-fancy.nvim",
-    },
-    opts = {
-      options = {
-        theme = "horizon",
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-        globalstatus = true,
-        refresh = {
-          statusline = 100,
-        },
-      },
-      sections = {
-        lualine_a = {
-          { "mode" },
-        },
-        lualine_b = {
-          { "fancy_branch" },
-          { "fancy_diff" },
-        },
-        lualine_c = {
-          -- { "fancy_cwd", substitute_home = true },
-          { "filename" },
-        },
-        lualine_x = {
-          { "fancy_macro" },
-          { "fancy_diagnostics" },
-          { "fancy_searchcount" },
-          { "fancy_location" },
-        },
-        lualine_y = {
-          { "fancy_filetype", ts_icon = "" },
-        },
-        lualine_z = {
-          { "fancy_lsp_servers" },
-        },
-      },
-    },
-  },
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"meuter/lualine-so-fancy.nvim",
+		},
+		opts = {
+			options = {
+				theme = "horizon",
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
+				globalstatus = true,
+				refresh = {
+					statusline = 100,
+				},
+			},
+			sections = {
+				lualine_a = {
+					{ "mode" },
+				},
+				lualine_b = {
+					{ "fancy_branch" },
+					{ "fancy_diff" },
+				},
+				lualine_c = {
+					-- { "fancy_cwd", substitute_home = true },
+					{ "filename" },
+				},
+				lualine_x = {
+					{ "fancy_macro" },
+					{ "fancy_diagnostics" },
+					{ "fancy_searchcount" },
+					{ "fancy_location" },
+				},
+				lualine_y = {
+					{ "fancy_filetype", ts_icon = "" },
+				},
+				lualine_z = {
+					{ "fancy_lsp_servers" },
+				},
+			},
+		},
+	},
 
 	{
 		"folke/zen-mode.nvim",
@@ -177,7 +177,6 @@ return {
 		},
 		keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
 	},
-
 	{
 		"nvimdev/dashboard-nvim",
 		event = "VimEnter",
@@ -197,10 +196,10 @@ return {
 			opts.config.header = vim.split(logo, "\n")
 		end,
 	},
-  {
-  "karb94/neoscroll.nvim",
-  config = function ()
-    require('neoscroll').setup {}
-  end
-  },
+	{
+		"karb94/neoscroll.nvim",
+		config = function()
+			require("neoscroll").setup({})
+		end,
+	},
 }
