@@ -18,10 +18,8 @@ alias l="eza -la -g --icons"
 # Alias for lazygit
 alias lzg="lazygit"
 
-# To enable zoxide in fish shell
-# zoxide init fish | source
+# To enable zoxide in fish shell and rebind cd to zoxide
 zoxide init --cmd cd fish | source
-# alias cd="z" # alias cd to z for zoxide
 
 alias cat="bat" # Use bat as cat
 
