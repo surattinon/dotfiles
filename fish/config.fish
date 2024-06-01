@@ -2,16 +2,26 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-# Aliases neovim
-alias vim="nvim"
-alias vi="nvim"
-alias n="nvim"
+# Alias for custom nvim
+alias vim="NVIM_APPNAME=nvchad nvim"
+alias vi="NVIM_APPNAME=nvchad nvim"
 
-alias lvim="~/.local/bin/lvim"
+# NVIM SELECTOR
+function nvims
+  set items nvchad default 
+  set config (printf "%s\n" $items | fzf --prompt=" Neovim Config = " --height=~50% --layout=reverse --border --exit-0)
 
-alias sshm="~/.local/bin/sshm"
+  if test -z "$config"
+    echo "Nothing selected"
+    return 0
+  else if test "$config" = default
+    set config ""
+  end
 
-# alias for eza
+  env NVIM_APPNAME=$config nvim $argv
+end
+
+# Alias for eza
 alias ls="eza --icons=always --sort=extension"
 alias l="eza -la -g --icons"
 
@@ -23,13 +33,19 @@ zoxide init --cmd cd fish | source
 
 alias cat="bat" # Use bat as cat
 
+alias svim="sudoedit" # Alias for sudoedit
 
-# Set sudoeditor to neovim
-set -eg EDITOR nvim
+
+# Set all editor to neovim
+set -x EDITOR /bin/nvim
+set -x SUDO_EDITOR /bin/nvim
 
 # Setup go path
 set -x GOPATH $HOME/go
 set -x PATH $PATH $GOPATH/bin
+
+# setup local bin
+set -x PATH $PATH $HOME/.local/bin
 
 # Auto start neofetch
 alias nf="clear && neofetch"
@@ -48,3 +64,8 @@ alias newtmux="tmux new-session -s" # Alias for new tmux session
 
 # Config thefuck
 thefuck --alias | source
+
+# KEYBINDS
+function fish_user_key_bindings
+  bind \cn 'nvims'
+end
